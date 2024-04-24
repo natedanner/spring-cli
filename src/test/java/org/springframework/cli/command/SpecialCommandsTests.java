@@ -31,7 +31,7 @@ public class SpecialCommandsTests {
 
 	@Test
 	void simpleExec() {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 			assertThat(context).hasSingleBean(SpecialCommands.class);
 			SpecialCommands specialCommands = context.getBean(SpecialCommands.class);
 			specialCommands.dotExec("ls -al");

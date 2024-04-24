@@ -45,7 +45,7 @@ public class SpringCliUserConfigTests {
 	@BeforeEach
 	public void setupTests() {
 		fileSystem = Jimfs.newFileSystem();
-		pathProvider = (path) -> fileSystem.getPath(path);
+		pathProvider = path -> fileSystem.getPath(path);
 	}
 
 	@Test

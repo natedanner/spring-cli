@@ -67,7 +67,7 @@ public class CommandCommands extends AbstractSpringCliCommands {
 			@Option(description = "The name of the user-defined sub-command to create.", defaultValue = "new",
 					longNames = "sub-command-name") String subCommandName,
 			@Option(description = "Path on which to run the command.") String path) {
-		Path projectPath = (path != null) ? IoUtils.getProjectPath(path) : IoUtils.getWorkingDirectory();
+		Path projectPath = path != null ? IoUtils.getProjectPath(path) : IoUtils.getWorkingDirectory();
 		// TODO check validity of passed in names as directory names.
 		Path commandPath = projectPath.resolve(".spring")
 			.resolve("commands")

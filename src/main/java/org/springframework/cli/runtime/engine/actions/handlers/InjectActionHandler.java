@@ -44,13 +44,13 @@ public class InjectActionHandler {
 
 	private static final Logger logger = LoggerFactory.getLogger(InjectActionHandler.class);
 
-	private TemplateEngine templateEngine;
+	private final TemplateEngine templateEngine;
 
-	private Map<String, Object> model;
+	private final Map<String, Object> model;
 
-	private Path cwd;
+	private final Path cwd;
 
-	private TerminalMessage terminalMessage;
+	private final TerminalMessage terminalMessage;
 
 	public InjectActionHandler(TemplateEngine templateEngine, Map<String, Object> model, Path cwd,
 			TerminalMessage terminalMessage) {
@@ -79,11 +79,11 @@ public class InjectActionHandler {
 					"Inject action can not be performed because the value of the 'to:' field resolved to an empty string.");
 		}
 		Path pathToFile = cwd.resolve(fileNameToInject).toAbsolutePath();
-		if ((!Files.exists(pathToFile))) {
+		if (!Files.exists(pathToFile)) {
 			throw new SpringCliException(
 					"Inject action can not be performed because the file " + pathToFile + " does not exist.");
 		}
-		if ((pathToFile.toFile().isDirectory())) {
+		if (pathToFile.toFile().isDirectory()) {
 			throw new SpringCliException("Inject action can not be performed because the path " + pathToFile
 					+ " is a directory, not a file.");
 		}

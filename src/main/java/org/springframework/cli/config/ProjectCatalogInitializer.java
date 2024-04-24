@@ -27,9 +27,9 @@ import org.springframework.cli.config.SpringCliUserConfig.ProjectCatalogs;
  */
 public class ProjectCatalogInitializer implements InitializingBean {
 
-	private SpringCliProjectCatalogProperties springCliProjectCatalogProperties;
+	private final SpringCliProjectCatalogProperties springCliProjectCatalogProperties;
 
-	private SpringCliUserConfig springCliUserConfig;
+	private final SpringCliUserConfig springCliUserConfig;
 
 	public ProjectCatalogInitializer(SpringCliUserConfig springCliUserConfig,
 			SpringCliProjectCatalogProperties springCliProjectCatalogProperties) {

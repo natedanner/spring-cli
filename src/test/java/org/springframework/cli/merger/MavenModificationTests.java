@@ -79,20 +79,20 @@ public class MavenModificationTests {
 
 		Model mergedModel = pomReader.readPom(mergedPomPath.toFile());
 		for (Plugin plugin : mergedModel.getBuild().getPlugins()) {
-			if (plugin.getGroupId().equals("org.apache.maven.plugins")
-					&& plugin.getArtifactId().equals("maven-deploy-plugin")) {
+			if ("org.apache.maven.plugins".equals(plugin.getGroupId())
+					&& "maven-deploy-plugin".equals(plugin.getArtifactId())) {
 				assertThat(ConversionUtils.fromDomToString((Xpp3Dom) plugin.getConfiguration()))
 					.contains("<skip>true</skip>");
 			}
-			else if (plugin.getGroupId().equals("org.apache.maven.plugins")
-					&& plugin.getArtifactId().equals("maven-shade-plugin")) {
+			else if ("org.apache.maven.plugins".equals(plugin.getGroupId())
+					&& "maven-shade-plugin".equals(plugin.getArtifactId())) {
 				String configurationXML = ConversionUtils.fromDomToString(((Xpp3Dom) plugin.getConfiguration()));
 				assertThat(configurationXML).contains("<createDependencyReducedPom>false</createDependencyReducedPom>");
 				assertThat(configurationXML).contains("<shadedArtifactAttached>true</shadedArtifactAttached>");
 				assertThat(configurationXML).contains("<shadedClassifierName>aws</shadedClassifierName>");
 			}
-			else if (plugin.getGroupId().equals("org.springframework.boot")
-					&& plugin.getArtifactId().equals("spring-boot-maven-plugin")) {
+			else if ("org.springframework.boot".equals(plugin.getGroupId())
+					&& "spring-boot-maven-plugin".equals(plugin.getArtifactId())) {
 				Dependency dep = plugin.getDependencies().iterator().next();
 				assertThat(dep.getGroupId()).isEqualTo("org.springframework.boot.experimental");
 				assertThat(dep.getArtifactId()).isEqualTo("spring-boot-thin-layout");
@@ -118,9 +118,8 @@ public class MavenModificationTests {
 		DependencyManagement dependencyManagement = modelToMerge.getDependencyManagement();
 		List<Dependency> toMergeDependencyManagementDependencies = dependencyManagement.getDependencies();
 
-		Consumer<Throwable> onError = e -> {
+		Consumer<Throwable> onError = e ->
 			logger.error("error in javaParser execution", e);
-		};
 		InMemoryExecutionContext executionContext = new InMemoryExecutionContext(onError);
 		List<Path> paths = new ArrayList<>();
 		paths.add(mergedPomPath);

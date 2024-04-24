@@ -127,7 +127,7 @@ public class ProjectHandler {
 
 		String projectNameToUse;
 		boolean createSubDirectoryForProject = true;
-		if (!projectInfo.getName().equalsIgnoreCase(".")) {
+		if (!".".equalsIgnoreCase(projectInfo.getName())) {
 			projectNameToUse = projectInfo.getName();
 			if (!JavaUtils.isValidDirectoryName(projectNameToUse)) {
 				throw new SpringCliException("Invalid project name used, can't create a directory with that name");
@@ -175,7 +175,7 @@ public class ProjectHandler {
 
 		Path repositoryContentsPath = sourceRepositoryService.retrieveRepositoryContents(urlToUse);
 		Path projectDir = IoUtils.getProjectPath(path);
-		Path workingPath = (projectDir != null) ? projectDir : IoUtils.getWorkingDirectory();
+		Path workingPath = projectDir != null ? projectDir : IoUtils.getWorkingDirectory();
 
 		ProjectMerger projectMerger = new ProjectMerger(repositoryContentsPath, workingPath, projectName,
 				this.terminalMessage);
@@ -247,7 +247,7 @@ public class ProjectHandler {
 	}
 
 	private Path getProjectDirectoryFromProjectName(Path projectDir, String projectName) {
-		Path workingPath = (projectDir != null) ? projectDir : IoUtils.getWorkingDirectory();
+		Path workingPath = projectDir != null ? projectDir : IoUtils.getWorkingDirectory();
 		Path projectDirectoryPath = Paths.get(workingPath.toString(), projectName);
 		if (Files.exists(projectDirectoryPath) && Files.isDirectory(projectDirectoryPath)) {
 			throw new SpringCliException("Directory named " + projectName + " already exists.  Choose another name.");
@@ -339,9 +339,8 @@ public class ProjectHandler {
 		Path pomPath = repositoryContentsPath.resolve("pom.xml");
 		paths.add(pomPath);
 		XmlParser xmlParser = new XmlParser();
-		Consumer<Throwable> onError = e -> {
+		Consumer<Throwable> onError = e ->
 			logger.error("error in xml parser execution", e);
-		};
 		List<SourceFile> documentList = xmlParser
 			.parse(paths, repositoryContentsPath, new InMemoryExecutionContext(onError))
 			.toList();
@@ -404,7 +403,7 @@ public class ProjectHandler {
 	private String findUrlFromProjectName(String projectName) {
 		Collection<ProjectRepository> projectRepositories = springCliUserConfig.getProjectRepositories()
 			.getProjectRepositories();
-		if (projectRepositories != null && projectRepositories.size() > 0) {
+		if (projectRepositories != null && !projectRepositories.isEmpty()) {
 			String url = findUrlFromProjectRepositories(projectName, projectRepositories);
 			if (url != null) {
 				return url;

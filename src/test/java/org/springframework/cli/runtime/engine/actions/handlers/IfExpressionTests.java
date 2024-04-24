@@ -38,7 +38,7 @@ class IfExpressionTests {
 
 	@Test
 	void testIfExpressionWithRunFile(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("if")
 				.executeCommand("run/define")
@@ -53,7 +53,7 @@ class IfExpressionTests {
 
 	@Test
 	void testIfExpressionsWithSpel(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("if")
 				.executeCommand("vars/notdefined")
@@ -69,7 +69,7 @@ class IfExpressionTests {
 
 	@Test
 	void testIfExpressions(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("if")
 				.executeCommand("vars/define")

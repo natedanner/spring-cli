@@ -47,7 +47,7 @@ public class ActionFileVisitor extends PathGatheringFileVisitor {
 
 	private boolean looksLikeText(Path path) {
 		try {
-			return (tika.detect(path).startsWith("text") || tika.detect(path).contains("xml"));
+			return tika.detect(path).startsWith("text") || tika.detect(path).contains("xml");
 		}
 		catch (IOException ex) {
 			logger.warn("Error detecting mime type for {}", path);

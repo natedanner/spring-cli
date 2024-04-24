@@ -36,7 +36,7 @@ import org.springframework.shell.table.TableModel;
 //@Command(command = "config", group = "Config")
 public class ConfigCommands extends AbstractSpringCliCommands {
 
-	private SpringCliUserConfig springCliUserConfig;
+	private final SpringCliUserConfig springCliUserConfig;
 
 	@Autowired
 	public ConfigCommands(SpringCliUserConfig springCliUserConfig) {
@@ -84,7 +84,7 @@ public class ConfigCommands extends AbstractSpringCliCommands {
 						removed = true;
 					}
 				}
-				if (commandDefault.getOptions().size() == 0) {
+				if (commandDefault.getOptions().isEmpty()) {
 					it.remove();
 				}
 			}
@@ -103,7 +103,7 @@ public class ConfigCommands extends AbstractSpringCliCommands {
 	@Command(command = "list", description = "List configuration values.")
 	public Table configList() {
 
-		Stream<String[]> header = Stream.<String[]>of(new String[] { "Command", "Sub Command", "Option Name/Values" });
+		Stream<String[]> header = Stream.of(new String[] { "Command", "Sub Command", "Option Name/Values" });
 
 		List<CommandDefault> commandDefaults = this.springCliUserConfig.getCommandDefaults().getCommandDefaults();
 		Stream<String[]> rows = null;

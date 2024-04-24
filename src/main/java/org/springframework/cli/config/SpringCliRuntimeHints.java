@@ -81,13 +81,12 @@ public class SpringCliRuntimeHints implements RuntimeHintsRegistrar {
 	}
 
 	private void registerForMostReflection(ReflectionHints reflectionHints, String... classNames) {
-		reflectionHints.registerTypes(typeReferences(classNames), hint -> {
+		reflectionHints.registerTypes(typeReferences(classNames), hint ->
 			hint.withMembers(MemberCategory.DECLARED_CLASSES, MemberCategory.DECLARED_FIELDS,
 					MemberCategory.PUBLIC_CLASSES, MemberCategory.PUBLIC_FIELDS,
 					MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS, MemberCategory.INVOKE_PUBLIC_METHODS,
 					MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INTROSPECT_DECLARED_METHODS,
-					MemberCategory.INVOKE_DECLARED_METHODS);
-		});
+					MemberCategory.INVOKE_DECLARED_METHODS));
 	}
 
 	private List<TypeReference> typeReferences(String... classNames) {

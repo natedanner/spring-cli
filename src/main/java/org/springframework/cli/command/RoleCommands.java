@@ -129,7 +129,7 @@ public class RoleCommands extends AbstractSpringCliCommands {
 	public Table roleList() {
 		File directory = this.roleService.getRolesVarPath();
 		List<String> rolesNames = this.roleService.getRoleNames(directory);
-		Stream<String[]> header = Stream.<String[]>of(new String[] { "Name" });
+		Stream<String[]> header = Stream.of(new String[] { "Name" });
 		Stream<String[]> rows;
 		if (rolesNames != null) {
 			rows = rolesNames.stream().map(tr -> new String[] { tr });

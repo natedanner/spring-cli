@@ -90,7 +90,7 @@ public class AddSimpleDependencyVisitor extends MavenIsoVisitor<ExecutionContext
 		Xml.Tag root = maven.getRoot();
 		if (!root.getChild("dependencies").isPresent()) {
 			doAfterVisit(new AddToTagVisitor<>(root, Xml.Tag.build("<dependencies/>"), new MavenTagInsertionComparator(
-					(root.getContent() == null) ? Collections.emptyList() : root.getContent())));
+					root.getContent() == null ? Collections.emptyList() : root.getContent())));
 		}
 
 		doAfterVisit(new InsertDependencyInOrder(scope));
@@ -115,13 +115,13 @@ public class AddSimpleDependencyVisitor extends MavenIsoVisitor<ExecutionContext
 
 				Xml.Tag dependencyTag = Xml.Tag.build("\n<dependency>\n" + "<groupId>" + groupId + "</groupId>\n"
 						+ "<artifactId>" + artifactId + "</artifactId>\n"
-						+ ((versionToUse != null) ? "<version>" + versionToUse + "</version>\n" : "")
-						+ ((classifier != null) ? "<classifier>" + classifier + "</classifier>\n" : "")
-						+ ((scope == null || "compile".equals(scope)) ? "" : "<scope>" + scope + "</scope>\n")
+						+ (versionToUse != null ? "<version>" + versionToUse + "</version>\n" : "")
+						+ (classifier != null ? "<classifier>" + classifier + "</classifier>\n" : "")
+						+ (scope == null || "compile".equals(scope) ? "" : "<scope>" + scope + "</scope>\n")
 						+ (Boolean.TRUE.equals(optional) ? "<optional>true</optional>\n" : "") + "</dependency>");
 
 				doAfterVisit(new AddToTagVisitor<>(tag, dependencyTag, new InsertDependencyComparator(
-						(tag.getContent() == null) ? Collections.emptyList() : tag.getContent(), dependencyTag)));
+						tag.getContent() == null ? Collections.emptyList() : tag.getContent(), dependencyTag)));
 				maybeUpdateModel();
 
 				return tag;

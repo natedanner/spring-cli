@@ -35,7 +35,7 @@ import static org.assertj.core.api.Assertions.assertThatException;
  */
 class AddManagedDependencyRecipeFactoryTests {
 
-	private AddManagedDependencyRecipeFactory sut = new AddManagedDependencyRecipeFactory();
+	private final AddManagedDependencyRecipeFactory sut = new AddManagedDependencyRecipeFactory();
 
 	@Test
 	@DisplayName("create recipe from dependency")

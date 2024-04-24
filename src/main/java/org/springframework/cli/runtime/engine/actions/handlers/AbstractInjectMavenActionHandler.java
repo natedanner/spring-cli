@@ -64,9 +64,8 @@ public abstract class AbstractInjectMavenActionHandler {
 	}
 
 	protected static ExecutionContext getExecutionContext() {
-		Consumer<Throwable> onError = e -> {
+		Consumer<Throwable> onError = e ->
 			logger.error("error in javaParser execution", e);
-		};
 		return new InMemoryExecutionContext(onError);
 	}
 

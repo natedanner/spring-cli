@@ -68,7 +68,7 @@ public class PathGatheringFileVisitor extends SimpleFileVisitor<Path> {
 	@Override
 	public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
 		String dirName = dir.getFileName().toString();
-		return forbiddenDirectoryPatterns.stream().noneMatch((p) -> p.matcher(dirName).matches())
+		return forbiddenDirectoryPatterns.stream().noneMatch(p -> p.matcher(dirName).matches())
 				? FileVisitResult.CONTINUE : FileVisitResult.SKIP_SUBTREE;
 	}
 
@@ -82,10 +82,10 @@ public class PathGatheringFileVisitor extends SimpleFileVisitor<Path> {
 
 	protected boolean rejectFile(Path file, BasicFileAttributes attrs) {
 		String filename = file.getFileName().toString();
-		if (filename.equalsIgnoreCase("command.yaml") || filename.equalsIgnoreCase("command.yml")) {
+		if ("command.yaml".equalsIgnoreCase(filename) || "command.yml".equalsIgnoreCase(filename)) {
 			return true;
 		}
-		return forbiddenFilenamePatterns.stream().anyMatch((p) -> p.matcher(filename).matches());
+		return forbiddenFilenamePatterns.stream().anyMatch(p -> p.matcher(filename).matches());
 	}
 
 }

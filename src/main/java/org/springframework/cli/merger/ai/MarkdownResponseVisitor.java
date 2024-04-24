@@ -24,22 +24,22 @@ import org.commonmark.node.FencedCodeBlock;
 
 public class MarkdownResponseVisitor extends AbstractVisitor {
 
-	private List<ProjectArtifact> projectArtifacts = new ArrayList<>();
+	private final List<ProjectArtifact> projectArtifacts = new ArrayList<>();
 
 	@Override
 	public void visit(FencedCodeBlock fencedCodeBlock) {
 		String info = fencedCodeBlock.getInfo();
 		String code = fencedCodeBlock.getLiteral();
-		if (info.equalsIgnoreCase("java")) {
+		if ("java".equalsIgnoreCase(info)) {
 			addJavaCode(code);
 		}
-		if (info.equalsIgnoreCase("xml")) {
+		if ("xml".equalsIgnoreCase(info)) {
 			addMavenDependencies(code);
 		}
-		if (info.equalsIgnoreCase("properties")) {
+		if ("properties".equalsIgnoreCase(info)) {
 			addApplicationProperties(code);
 		}
-		if (info.equalsIgnoreCase("html")) {
+		if ("html".equalsIgnoreCase(info)) {
 			addHtml(code);
 		}
 		if (info.isBlank()) {

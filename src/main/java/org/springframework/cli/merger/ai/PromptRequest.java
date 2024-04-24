@@ -18,9 +18,9 @@ package org.springframework.cli.merger.ai;
 
 public class PromptRequest {
 
-	private String systemPrompt;
+	private final String systemPrompt;
 
-	private String userPrompt;
+	private final String userPrompt;
 
 	public PromptRequest(String systemPrompt, String userPrompt) {
 		this.systemPrompt = systemPrompt;

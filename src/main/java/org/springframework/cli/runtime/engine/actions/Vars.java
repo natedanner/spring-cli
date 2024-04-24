@@ -25,7 +25,7 @@ import org.springframework.lang.Nullable;
 
 public class Vars {
 
-	private List<Question> questions;
+	private final List<Question> questions;
 
 	public Map<String, Object> data;
 

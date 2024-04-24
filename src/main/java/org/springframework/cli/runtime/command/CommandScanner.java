@@ -44,7 +44,7 @@ public class CommandScanner {
 
 	private final Logger logger = LoggerFactory.getLogger(CommandScanner.class);
 
-	private Path pathToScan;
+	private final Path pathToScan;
 
 	public CommandScanner(Path path) {
 		this.pathToScan = Objects.requireNonNull(path);

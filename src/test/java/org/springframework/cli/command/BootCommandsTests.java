@@ -39,7 +39,7 @@ public class BootCommandsTests {
 
 	@Test
 	void canCreateFromDefaults(final @TempDir Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 			assertThat(context).hasSingleBean(BootCommands.class);
 			BootCommands bootCommands = context.getBean(BootCommands.class);
 
@@ -54,7 +54,7 @@ public class BootCommandsTests {
 
 	@Test
 	void canCreateAndChangeNameAndPackageBasedOnGroupId(final @TempDir Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 			assertThat(context).hasSingleBean(BootCommands.class);
 			BootCommands bootCommands = context.getBean(BootCommands.class);
 			String path = workingDir.toAbsolutePath().toString();
@@ -68,7 +68,7 @@ public class BootCommandsTests {
 
 	@Test
 	void canCreateAndChangeNameAndPackageBasedOnPackageName(final @TempDir Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 			assertThat(context).hasSingleBean(BootCommands.class);
 			BootCommands bootCommands = context.getBean(BootCommands.class);
 			String path = workingDir.toAbsolutePath().toString();
@@ -82,7 +82,7 @@ public class BootCommandsTests {
 
 	@Test
 	void canCreateUsingGithubUri(final @TempDir Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 			assertThat(context).hasSingleBean(BootCommands.class);
 			BootCommands bootCommands = context.getBean(BootCommands.class);
 			String path = workingDir.toAbsolutePath().toString();
@@ -97,7 +97,7 @@ public class BootCommandsTests {
 
 	@Test
 	void canCreateFromRegisteredProject(final @TempDir Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockFakeUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockFakeUserConfig.class).run(context -> {
 			assertThat(context).hasSingleBean(BootCommands.class);
 			BootCommands bootCommands = context.getBean(BootCommands.class);
 			String path = workingDir.toAbsolutePath().toString();
@@ -111,7 +111,7 @@ public class BootCommandsTests {
 
 	@Test
 	void canCreateFromRegisteredCatalog(final @TempDir Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockFakeUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockFakeUserConfig.class).run(context -> {
 			assertThat(context).hasSingleBean(BootCommands.class);
 			BootCommands bootCommands = context.getBean(BootCommands.class);
 			String path = workingDir.toAbsolutePath().toString();
@@ -125,7 +125,7 @@ public class BootCommandsTests {
 
 	@Test
 	void canCreateAndAddProjects(final @TempDir Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockFakeUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockFakeUserConfig.class).run(context -> {
 			assertThat(context).hasSingleBean(BootCommands.class);
 			BootCommands bootCommands = context.getBean(BootCommands.class);
 			String path = workingDir.toAbsolutePath().toString();
@@ -146,7 +146,7 @@ public class BootCommandsTests {
 
 	@Test
 	void canCreateAndAddProjectThatModifiesManagedDepsAndMergesProperties(final @TempDir Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockFakeUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockFakeUserConfig.class).run(context -> {
 			assertThat(context).hasSingleBean(BootCommands.class);
 			BootCommands bootCommands = context.getBean(BootCommands.class);
 			String path = workingDir.toAbsolutePath().toString();
@@ -200,10 +200,10 @@ public class BootCommandsTests {
 			PomReader pomReader = new PomReader();
 			Model model = pomReader.readPom(projectDir.resolve("pom.xml").toFile());
 			assertThat(model.getDependencies())
-				.anyMatch(d -> d.getGroupId().equals("org.springframework.boot")
-						&& d.getArtifactId().equals("spring-boot-starter-data-jpa"))
-				.anyMatch(d -> d.getGroupId().equals("com.h2database") && d.getArtifactId().equals("h2")
-						&& d.getScope().equals("runtime"));
+				.anyMatch(d -> "org.springframework.boot".equals(d.getGroupId())
+						&& "spring-boot-starter-data-jpa".equals(d.getArtifactId()))
+				.anyMatch(d -> "com.h2database".equals(d.getGroupId()) && "h2".equals(d.getArtifactId())
+						&& "runtime".equals(d.getScope()));
 		});
 	}
 

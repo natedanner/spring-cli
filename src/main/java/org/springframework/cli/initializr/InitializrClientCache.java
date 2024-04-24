@@ -44,9 +44,7 @@ public class InitializrClientCache {
 	 * @return initializr client
 	 */
 	public InitializrClient get(String url) {
-		return cache.computeIfAbsent(url, baseUrl -> {
-			return InitializrClient.builder(webClientBuilder).target(baseUrl).build();
-		});
+		return cache.computeIfAbsent(url, baseUrl -> InitializrClient.builder(webClientBuilder).target(baseUrl).build());
 	}
 
 }

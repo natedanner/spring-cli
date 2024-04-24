@@ -351,7 +351,7 @@ public class DynamicCommand {
 			.stream() //
 			.map(p -> new SimpleImmutableEntry<>(p, actionFileReader.read(p))) //
 			.filter(kv -> kv.getValue().isPresent()) //
-			.collect(toSortedMap(Entry::getKey, (e) -> e.getValue().get()));
+			.collect(toSortedMap(Entry::getKey, e -> e.getValue().get()));
 	}
 
 	private static <T, K, U> Collector<T, ?, Map<K, U>> toSortedMap(Function<? super T, ? extends K> keyMapper,

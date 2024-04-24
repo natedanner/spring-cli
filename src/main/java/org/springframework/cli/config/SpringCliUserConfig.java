@@ -124,7 +124,7 @@ public class SpringCliUserConfig {
 	 */
 	public Map<String, Host> getHosts() {
 		Hosts hosts = hostsUserConfig.getConfig();
-		return (hosts != null) ? hosts.getHosts() : null;
+		return hosts != null ? hosts.getHosts() : null;
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class SpringCliUserConfig {
 	 */
 	public ProjectCatalogs getProjectCatalogs() {
 		ProjectCatalogs catalogs = projectCatalogsUserConfig.getConfig();
-		return (catalogs != null) ? catalogs : new ProjectCatalogs();
+		return catalogs != null ? catalogs : new ProjectCatalogs();
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class SpringCliUserConfig {
 	 */
 	public ProjectRepositories getProjectRepositories() {
 		ProjectRepositories repositories = projectRepositoriesUserConfig.getConfig();
-		return (repositories != null) ? repositories : new ProjectRepositories();
+		return repositories != null ? repositories : new ProjectRepositories();
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class SpringCliUserConfig {
 	 */
 	public CommandDefaults getCommandDefaults() {
 		CommandDefaults commandDefaults = this.commandDefaultsUserConfig.getConfig();
-		return (commandDefaults != null) ? commandDefaults : new CommandDefaults();
+		return commandDefaults != null ? commandDefaults : new CommandDefaults();
 	}
 
 	/**
@@ -210,7 +210,7 @@ public class SpringCliUserConfig {
 
 	public Map<String, Initializr> getInitializrs() {
 		Initializrs initializrs = initializrsUserConfig.getConfig();
-		return (initializrs != null) ? initializrs.getInitializrs() : new HashMap<>();
+		return initializrs != null ? initializrs.getInitializrs() : new HashMap<>();
 	}
 
 	public void setInitializrs(Initializrs initializrs) {

@@ -82,7 +82,7 @@ public class AbstractCommandTests {
 			List<String> actualLines = Files.readAllLines(fileToInject);
 			Patch<String> patch = DiffUtils.diff(actualLines, expectedLines);
 
-			boolean failed = patch.getDeltas().size() > 0;
+			boolean failed = !patch.getDeltas().isEmpty();
 			if (failed) {
 				// failed keep modified file with .failed suffix, restore original file
 				// from backup and delete backup

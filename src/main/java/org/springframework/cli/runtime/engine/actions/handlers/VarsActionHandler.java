@@ -94,7 +94,7 @@ public class VarsActionHandler {
 		}
 		RoleService roleService = new RoleService(cwd);
 		for (Entry<String, Object> objectEntry : data.entrySet()) {
-			String keyToUse = templateEngine.process(objectEntry.getKey().toString(), model);
+			String keyToUse = templateEngine.process(objectEntry.getKey(), model);
 			Object valueToUse = JavaUtils.inferType(templateEngine.process(objectEntry.getValue().toString(), model));
 			// TODO store in default role "" for now
 			String roleName = "";
@@ -125,7 +125,7 @@ public class VarsActionHandler {
 		if (type == null) {
 			throw new SpringCliException("Question type can not be null.  Choose from 'input', 'dropdwon' or 'path'.");
 		}
-		return type.equals("input") || type.equals("dropdown") || type.equals("path");
+		return "input".equals(type) || "dropdown".equals(type) || "path".equals(type);
 	}
 
 	private void processQuestion(Question question) {
@@ -231,9 +231,7 @@ public class VarsActionHandler {
 		}
 	}
 
-	private static final Comparator<SelectorItem<String>> NAME_COMPARATOR = (o1, o2) -> {
-		return o1.getName().compareTo(o2.getName());
-	};
+	private static final Comparator<SelectorItem<String>> NAME_COMPARATOR = (o1, o2) -> o1.getName().compareTo(o2.getName());
 
 	private Map<String, String> getOptions(Options options) {
 		if (options.getExec() == null) {

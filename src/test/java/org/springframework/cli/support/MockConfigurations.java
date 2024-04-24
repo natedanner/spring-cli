@@ -52,14 +52,12 @@ public class MockConfigurations {
 
 		@Bean
 		Terminal terminal() {
-			Terminal mockTerminal = Mockito.mock(Terminal.class);
-			return mockTerminal;
+			return Mockito.mock(Terminal.class);
 		}
 
 		@Bean
 		ThemeResolver themeResolver() {
-			ThemeResolver mockThemeResolver = Mockito.mock(ThemeResolver.class);
-			return mockThemeResolver;
+			return Mockito.mock(ThemeResolver.class);
 		}
 
 		@Bean
@@ -75,9 +73,8 @@ public class MockConfigurations {
 		@Bean
 		BootCommands bootCommands(SpringCliUserConfig springCliUserConfig,
 				SourceRepositoryService sourceRepositoryService) {
-			BootCommands bootCommands = new BootCommands(springCliUserConfig, sourceRepositoryService,
+			return new BootCommands(springCliUserConfig, sourceRepositoryService,
 					TerminalMessage.noop());
-			return bootCommands;
 		}
 
 		@Bean
@@ -113,7 +110,7 @@ public class MockConfigurations {
 		@Bean
 		SpringCliUserConfig springCliUserConfig() {
 			FileSystem fileSystem = Jimfs.newFileSystem();
-			Function<String, Path> pathProvider = (path) -> fileSystem.getPath(path);
+			Function<String, Path> pathProvider = fileSystem::getPath;
 			return new SpringCliUserConfig(pathProvider);
 		}
 

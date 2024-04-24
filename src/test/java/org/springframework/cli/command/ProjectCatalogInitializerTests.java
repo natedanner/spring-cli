@@ -50,7 +50,7 @@ public class ProjectCatalogInitializerTests {
 	void testHasInitializedProjectCatalog() {
 		ApplicationContextRunner contextRunner = new ApplicationContextRunner()
 			.withUserConfiguration(ProjectCatalogInitializerTests.ProjectCatalogInitializerConfig.class);
-		contextRunner.run((context) -> {
+		contextRunner.run(context -> {
 			assertThat(context).hasSingleBean(ProjectCatalogCommands.class);
 			ProjectCatalogCommands projectCatalogCommands = context.getBean(ProjectCatalogCommands.class);
 			Table table = (Table) projectCatalogCommands.catalogList(false);
@@ -72,7 +72,7 @@ public class ProjectCatalogInitializerTests {
 					"spring.cli.project.catalog.init.tags=tag1,tag2");
 		// //The default values should not be configured, but taken instead from property
 		// values
-		contextRunner.run((context) -> {
+		contextRunner.run(context -> {
 			assertThat(context).hasSingleBean(ProjectCatalogCommands.class);
 			ProjectCatalogCommands projectCatalogCommands = context.getBean(ProjectCatalogCommands.class);
 			Table table = (Table) projectCatalogCommands.catalogList(false);
@@ -88,7 +88,7 @@ public class ProjectCatalogInitializerTests {
 	void testWithExistingProjectCatalog() {
 		ApplicationContextRunner contextRunner = new ApplicationContextRunner().withUserConfiguration(
 				ProjectCatalogInitializerTests.ProjectCatalogInitializerWithExistingCatalogConfig.class);
-		contextRunner.run((context) -> {
+		contextRunner.run(context -> {
 			assertThat(context).hasSingleBean(ProjectCatalogCommands.class);
 			ProjectCatalogCommands projectCatalogCommands = context.getBean(ProjectCatalogCommands.class);
 			Table table = (Table) projectCatalogCommands.catalogList(false);
@@ -107,7 +107,7 @@ public class ProjectCatalogInitializerTests {
 		@Bean
 		SpringCliUserConfig springCliUserConfig() {
 			FileSystem fileSystem = Jimfs.newFileSystem();
-			Function<String, Path> pathProvider = (path) -> fileSystem.getPath(path);
+			Function<String, Path> pathProvider = fileSystem::getPath;
 			return new SpringCliUserConfig(pathProvider);
 		}
 
@@ -143,7 +143,7 @@ public class ProjectCatalogInitializerTests {
 		@Bean
 		SpringCliUserConfig springCliUserConfig() {
 			FileSystem fileSystem = Jimfs.newFileSystem();
-			Function<String, Path> pathProvider = (path) -> fileSystem.getPath(path);
+			Function<String, Path> pathProvider = fileSystem::getPath;
 			return new SpringCliUserConfig(pathProvider);
 		}
 
@@ -160,7 +160,7 @@ public class ProjectCatalogInitializerTests {
 		@Bean
 		ProjectCatalogCommands projectCatalogCommands(SpringCliUserConfig springCliUserConfig,
 				SourceRepositoryService sourceRepositoryService, ObjectMapper objectMapper) {
-			List<ProjectCatalog> projectCatalogList = new ArrayList<ProjectCatalog>();
+			List<ProjectCatalog> projectCatalogList = new ArrayList<>();
 			projectCatalogList
 				.add(ProjectCatalog.of("fooname", "foodescription", "foourl", Arrays.asList("footag1, footag2")));
 

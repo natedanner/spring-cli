@@ -85,7 +85,7 @@ public class ProjectCatalogCommands extends AbstractSpringCliCommands {
 			return objectMapper.writeValueAsString(catalogRepositories);
 		}
 
-		Stream<String[]> header = Stream.<String[]>of(new String[] { "Name", "Description", "URL", "Tags" });
+		Stream<String[]> header = Stream.of(new String[] { "Name", "Description", "URL", "Tags" });
 		List<String[]> allRows = new ArrayList<>();
 
 		// TODO enforce all entries have name and Url
@@ -133,7 +133,7 @@ public class ProjectCatalogCommands extends AbstractSpringCliCommands {
 		if (json) {
 			return objectMapper.writeValueAsString(projectCatalogs);
 		}
-		Stream<String[]> header = Stream.<String[]>of(new String[] { "Name", "Description", "URL", "Tags" });
+		Stream<String[]> header = Stream.of(new String[] { "Name", "Description", "URL", "Tags" });
 		Stream<String[]> rows = null;
 		if (projectCatalogs != null) {
 			rows = projectCatalogs.stream()

@@ -36,7 +36,7 @@ class InjectMavenRepositoryActionHandlerTests {
 
 	@Test
 	void injectMavenDependency(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("inject-maven-repository")
@@ -51,7 +51,7 @@ class InjectMavenRepositoryActionHandlerTests {
 
 	@Test
 	void injectMavenDependencyUsingVar(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("inject-maven-repository")

@@ -100,11 +100,11 @@ public class ProjectMerger {
 
 	private static final Logger logger = LoggerFactory.getLogger(ProjectMerger.class);
 
-	private Path toMergeProjectPath;
+	private final Path toMergeProjectPath;
 
-	private Path currentProjectPath;
+	private final Path currentProjectPath;
 
-	private String projectName;
+	private final String projectName;
 
 	private final TerminalMessage terminalMessage;
 
@@ -179,9 +179,8 @@ public class ProjectMerger {
 
 		if (springBootApplicationFile.isPresent()) {
 			CollectAnnotationAndImportInformationRecipe collectAnnotationAndImportInformationRecipe = new CollectAnnotationAndImportInformationRecipe();
-			Consumer<Throwable> onError = e -> {
+			Consumer<Throwable> onError = e ->
 				logger.error("error in javaParser execution", e);
-			};
 			InMemoryExecutionContext executionContext = new InMemoryExecutionContext(onError);
 			List<Path> paths = new ArrayList<>();
 			paths.add(springBootApplicationFile.get().toPath());
@@ -295,7 +294,7 @@ public class ProjectMerger {
 		for (String fileName : fileNames) {
 			File srcFile = new File(fromDir, fileName);
 			File destFile = new File(toDir, fileName);
-			if (srcFile.getName().equals("pom.xml") || srcFile.getName().equals("LICENSE")) {
+			if ("pom.xml".equals(srcFile.getName()) || "LICENSE".equals(srcFile.getName())) {
 				continue;
 			}
 			// hack to avoid bringing over any gradle files for now as this POC is maven
@@ -305,7 +304,7 @@ public class ProjectMerger {
 			}
 			// Change readme file name have the project name that is being merged into the
 			// code base
-			if (FilenameUtils.getBaseName(srcFile.getName()).equalsIgnoreCase("README")) {
+			if ("README".equalsIgnoreCase(FilenameUtils.getBaseName(srcFile.getName()))) {
 				Path newFile = Paths.get(FilenameUtils.getPath(destFile.getName()),
 						FilenameUtils.getBaseName(destFile.getName()) + "-" + projectName + "."
 								+ FilenameUtils.getExtension(destFile.getName()));
@@ -316,12 +315,12 @@ public class ProjectMerger {
 					continue;
 				}
 			}
-			if (destFile.exists() && srcFile.getName().equals("application")) {
+			if (destFile.exists() && "application".equals(srcFile.getName())) {
 				Optional<String> extension = getExtension(srcFile.getName());
-				if (extension.isPresent() && extension.get().equals("properties")) {
+				if (extension.isPresent() && "properties".equals(extension.get())) {
 					mergeAndWriteProperties(srcFile, destFile);
 				}
-				else if (extension.isPresent() && (extension.get().equals("yaml") || extension.get().equals("yml"))) {
+				else if (extension.isPresent() && ("yaml".equals(extension.get()) || "yml".equals(extension.get()))) {
 					mergeAndWriteYaml(srcFile, destFile);
 				}
 				else {
@@ -426,7 +425,7 @@ public class ProjectMerger {
 		List<Plugin> plugins = toMergeModelBuild.getPlugins();
 		for (Plugin plugin : plugins) {
 
-			String configuration = (plugin.getConfiguration() != null)
+			String configuration = plugin.getConfiguration() != null
 					? ConversionUtils.fromDomToString((Xpp3Dom) plugin.getConfiguration()) : null;
 			String dependencies = null;
 			if (!currentModelBuild.getPlugins().contains(plugin)
@@ -484,7 +483,7 @@ public class ProjectMerger {
 				if (scope == null) {
 					scope = "compile";
 				}
-				String version = (candidateDependency.getVersion() == null) ? "latest"
+				String version = candidateDependency.getVersion() == null ? "latest"
 						: candidateDependency.getVersion();
 				@Nullable
 				String versionPattern = ".*";
@@ -666,9 +665,8 @@ public class ProjectMerger {
 	}
 
 	private ExecutionContext getExecutionContext() {
-		Consumer<Throwable> onError = e -> {
+		Consumer<Throwable> onError = e ->
 			logger.error("error in javaParser execution", e);
-		};
 		return new InMemoryExecutionContext(onError);
 	}
 

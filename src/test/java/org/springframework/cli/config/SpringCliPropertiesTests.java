@@ -29,7 +29,7 @@ public class SpringCliPropertiesTests {
 
 	@Test
 	public void defaultNoPropertiesSet() {
-		this.contextRunner.withUserConfiguration(Config1.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(Config1.class).run(context -> {
 			SpringCliProperties properties = context.getBean(SpringCliProperties.class);
 			assertThat(properties.getInitializr().getBaseUrl()).isEqualTo("https://start.spring.io");
 			assertThat(properties.getGithub().getClientId()).isNull();
@@ -43,7 +43,7 @@ public class SpringCliPropertiesTests {
 			.withPropertyValues("spring.cli.github.client-id=fakeid")
 			.withPropertyValues("spring.cli.github.default-scopes=fakescopes")
 			.withUserConfiguration(Config1.class)
-			.run((context) -> {
+			.run(context -> {
 				SpringCliProperties properties = context.getBean(SpringCliProperties.class);
 				assertThat(properties.getInitializr().getBaseUrl()).isEqualTo("fakeurl");
 				assertThat(properties.getGithub().getClientId()).isEqualTo("fakeid");

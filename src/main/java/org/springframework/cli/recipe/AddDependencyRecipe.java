@@ -78,9 +78,8 @@ public class AddDependencyRecipe extends Recipe {
 
 	@Override
 	public TreeVisitor<?, ExecutionContext> getVisitor() {
-		AddDependencyVisitor addDependencyVisitor = new AddDependencyVisitor(groupId, artifactId, version, null, scope,
+		return new AddDependencyVisitor(groupId, artifactId, version, null, scope,
 				true, type, classifier, optional, familyRegex, metadataFailures);
-		return addDependencyVisitor;
 	}
 
 }

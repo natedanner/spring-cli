@@ -38,7 +38,7 @@ public class GenerateHandlerTests {
 
 	@Test
 	void generateFileUsingModelPopulators(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("generate")
 				.executeCommand("hello/new")
@@ -60,7 +60,7 @@ public class GenerateHandlerTests {
 	@Test
 	@DisabledOnOs(OS.WINDOWS)
 	void generateFromFile(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("generate")

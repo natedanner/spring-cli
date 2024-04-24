@@ -36,7 +36,7 @@ class InjectMavenBuildPluginActionHandlerTests {
 
 	@Test
 	void injectMavenBuildPlugin(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("inject-maven-build-plugin")

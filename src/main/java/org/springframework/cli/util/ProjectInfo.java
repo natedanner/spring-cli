@@ -22,15 +22,15 @@ public class ProjectInfo {
 
 	private String name;
 
-	private String description;
+	private final String description;
 
-	private String groupId;
+	private final String groupId;
 
-	private String artifactId;
+	private final String artifactId;
 
-	private String version;
+	private final String version;
 
-	private String packageName;
+	private final String packageName;
 
 	public ProjectInfo(String groupId, String artifactId, String version, String name, String description,
 			String packageName) {
@@ -80,7 +80,7 @@ public class ProjectInfo {
 	public ProjectInfo getDefaults() {
 		// if no artifact name is specified, fall back to using the name, which may or
 		// may not be specified.
-		String artifactIdToUse = (StringUtils.hasText(artifactId)) ? artifactId : name;
+		String artifactIdToUse = StringUtils.hasText(artifactId) ? artifactId : name;
 
 		// if no package name is specified, try to derive from groupId and artifactId
 		String packageNameToUse;

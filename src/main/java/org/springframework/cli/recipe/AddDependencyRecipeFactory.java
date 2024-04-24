@@ -63,14 +63,13 @@ public class AddDependencyRecipeFactory extends AbstractRecipeFactory {
 			Boolean optional = Boolean.parseBoolean(getNullOrTextValue(jsonNode, "optional"));
 			@Nullable
 			String familyPattern = null;
-			Pattern familyRegex = (familyPattern != null) ? Pattern.compile(familyPattern) : null;
+			Pattern familyRegex = familyPattern != null ? Pattern.compile(familyPattern) : null;
 			@Nullable
 			Boolean acceptTransitive = null;
 			MavenMetadataFailures metadataFailures = null;
 
-			AddDependencyRecipe recipe = new AddDependencyRecipe(groupId, artifactId, version, scope, type, classifier,
+			return new AddDependencyRecipe(groupId, artifactId, version, scope, type, classifier,
 					optional, familyRegex, metadataFailures);
-			return recipe;
 		}
 		catch (JsonProcessingException ex) {
 			throw new RuntimeException(ex);

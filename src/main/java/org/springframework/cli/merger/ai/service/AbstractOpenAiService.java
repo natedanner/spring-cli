@@ -53,13 +53,12 @@ public abstract class AbstractOpenAiService implements org.springframework.cli.m
 
 	protected ChatCompletionRequest getChatCompletionRequest(PromptRequest promptRequest) {
 		createOpenAiService();
-		ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest.builder()
+		return ChatCompletionRequest.builder()
 			.model("gpt-3.5-turbo")
 			.temperature(0.3)
 			.messages(List.of(new ChatMessage("system", promptRequest.getSystemPrompt()),
 					new ChatMessage("user", promptRequest.getUserPrompt())))
 			.build();
-		return chatCompletionRequest;
 	}
 
 	private void createOpenAiService() {
@@ -114,12 +113,10 @@ public abstract class AbstractOpenAiService implements org.springframework.cli.m
 	@NotNull
 	protected String getResponse(ChatCompletionRequest chatCompletionRequest) {
 		StringBuilder builder = new StringBuilder();
-		getOpenAiService().createChatCompletion(chatCompletionRequest).getChoices().forEach(choice -> {
-			builder.append(choice.getMessage().getContent());
-		});
+		getOpenAiService().createChatCompletion(chatCompletionRequest).getChoices().forEach(choice ->
+			builder.append(choice.getMessage().getContent()));
 
-		String response = builder.toString();
-		return response;
+		return builder.toString();
 	}
 
 }

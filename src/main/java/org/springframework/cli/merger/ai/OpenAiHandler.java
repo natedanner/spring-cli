@@ -157,8 +157,7 @@ public class OpenAiHandler {
 
 	List<ProjectArtifact> computeProjectArtifacts(String response) {
 		ProjectArtifactCreator projectArtifactCreator = new ProjectArtifactCreator();
-		List<ProjectArtifact> projectArtifacts = projectArtifactCreator.create(response);
-		return projectArtifacts;
+		return projectArtifactCreator.create(response);
 	}
 
 }

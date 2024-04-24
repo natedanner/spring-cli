@@ -53,8 +53,7 @@ public class RoleService {
 		YamlMapFactoryBean factory = new YamlMapFactoryBean();
 		factory.setResolutionMethod(ResolutionMethod.OVERRIDE_AND_IGNORE);
 		factory.setResources(new FileSystemResource(getFile(name)));
-		Map<String, Object> map = factory.getObject();
-		return map;
+		return factory.getObject();
 	}
 
 	public void updateRole(String roleName, String key, Object value) {
@@ -142,8 +141,7 @@ public class RoleService {
 			fileName = "vars.yml";
 		}
 		String filePath = getRolesVarPath() + File.separator + fileName;
-		File propertiesFile = new File(filePath);
-		return propertiesFile;
+		return new File(filePath);
 	}
 
 	public File getRolesVarPath() {

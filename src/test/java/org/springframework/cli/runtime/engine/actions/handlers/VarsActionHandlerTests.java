@@ -40,7 +40,7 @@ public class VarsActionHandlerTests extends AbstractShellTests {
 
 	@Test
 	void testExpressionDefineVarWithHandlebars(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("vars")
@@ -66,7 +66,7 @@ public class VarsActionHandlerTests extends AbstractShellTests {
 
 	@Test
 	void testTrueIfExpressionDefineVarWithData(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("vars")
@@ -83,7 +83,7 @@ public class VarsActionHandlerTests extends AbstractShellTests {
 
 	@Test
 	void testFalseIfExpressionDefineVarWithData(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("vars")
@@ -101,7 +101,7 @@ public class VarsActionHandlerTests extends AbstractShellTests {
 
 	@Test
 	void testDefineVarWithData(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("vars")
@@ -120,7 +120,7 @@ public class VarsActionHandlerTests extends AbstractShellTests {
 	@Test
 	@Disabled
 	void testDefineVarWithExec(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			CommandRunner commandRunner = new CommandRunner.Builder(context).prepareProject("rest-service", workingDir)
 				.installCommandGroup("vars")

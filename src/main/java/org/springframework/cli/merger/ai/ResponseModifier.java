@@ -32,10 +32,10 @@ public class ResponseModifier {
 		sb.append(System.lineSeparator());
 		sb.append(System.lineSeparator());
 		DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
-		sb.append("Generated on " + LocalDateTime.now().format(formatter));
+		sb.append("Generated on ").append(LocalDateTime.now().format(formatter));
 		sb.append(System.lineSeparator());
 		sb.append(System.lineSeparator());
-		sb.append("Generated using the description: " + description);
+		sb.append("Generated using the description: ").append(description);
 		sb.append(System.lineSeparator());
 		sb.append(System.lineSeparator());
 		sb.append(response);
@@ -75,9 +75,8 @@ public class ResponseModifier {
 		}
 		else {
 			String s1 = response.replace("<groupId>mysql</groupId>", "<groupId>com.mysql</groupId>");
-			String s2 = s1.replace("<artifactId>mysql-connector-java</artifactId>",
+			return s1.replace("<artifactId>mysql-connector-java</artifactId>",
 					"<artifactId>mysql-connector-j</artifactId>");
-			return s2;
 		}
 
 	}

@@ -31,7 +31,7 @@ public class Generate {
 	 * If set to false, generation of the template is skipped if the {@link #generate
 	 * destination file} already exists.
 	 */
-	private boolean overwrite;
+	private final boolean overwrite;
 
 	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
 	Generate(@JsonProperty("to") String to, @JsonProperty("text") String text, @JsonProperty("from") String from,

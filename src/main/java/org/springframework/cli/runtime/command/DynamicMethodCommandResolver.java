@@ -81,8 +81,7 @@ public class DynamicMethodCommandResolver implements CommandResolver {
 		Path pathToUse = Paths.get(cwd.toString(), ".spring", "commands");
 		log.debug("Looking for user-defined commands in directory " + pathToUse);
 		CommandScanner scanner = new CommandScanner(pathToUse);
-		CommandScanResults commandScanResults = scanner.scan();
-		return commandScanResults;
+		return scanner.scan();
 	}
 
 	private List<CommandRegistration> registerSpringCliCommands(CommandScanResults results,

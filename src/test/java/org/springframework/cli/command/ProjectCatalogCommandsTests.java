@@ -49,7 +49,7 @@ public class ProjectCatalogCommandsTests {
 
 	@Test
 	void testProjectCatalogCommands() {
-		this.contextRunner.run((context) -> {
+		this.contextRunner.run(context -> {
 			assertThat(context).hasSingleBean(ProjectCatalogCommands.class);
 			ProjectCatalogCommands projectCatalogCommands = context.getBean(ProjectCatalogCommands.class);
 
@@ -101,7 +101,7 @@ public class ProjectCatalogCommandsTests {
 		@Bean
 		SpringCliUserConfig springCliUserConfig() {
 			FileSystem fileSystem = Jimfs.newFileSystem();
-			Function<String, Path> pathProvider = (path) -> fileSystem.getPath(path);
+			Function<String, Path> pathProvider = fileSystem::getPath;
 			return new SpringCliUserConfig(pathProvider);
 		}
 
@@ -123,9 +123,8 @@ public class ProjectCatalogCommandsTests {
 		@Bean
 		ProjectCatalogCommands projectCatalogCommands(SpringCliUserConfig springCliUserConfig,
 				SourceRepositoryService sourceRepositoryService, ObjectMapper objectMapper) {
-			ProjectCatalogCommands projectCatalogCommands = new ProjectCatalogCommands(springCliUserConfig,
+			return new ProjectCatalogCommands(springCliUserConfig,
 					sourceRepositoryService, TerminalMessage.noop(), objectMapper);
-			return projectCatalogCommands;
 		}
 
 	}

@@ -39,7 +39,7 @@ public class ChangeNewlyClonedPomRecipe extends Recipe {
 
 	static final XPathMatcher PROJECT_MATCHER = new XPathMatcher("/project");
 
-	private ProjectInfo projectInfo;
+	private final ProjectInfo projectInfo;
 
 	public ChangeNewlyClonedPomRecipe(ProjectInfo projectInfo) {
 		this.projectInfo = projectInfo;

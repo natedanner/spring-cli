@@ -70,7 +70,7 @@ class DynamicMethodCommandResolverTests {
 		List<ModelPopulator> modelPopulators = new ArrayList<>();
 		modelPopulators.add(systemModelPopulator);
 		DynamicMethodCommandResolver resolver = new DynamicMethodCommandResolver(modelPopulators,
-				() -> CommandRegistration.builder(), TerminalMessage.noop(), null);
+				CommandRegistration::builder, TerminalMessage.noop(), null);
 		// Move to mock scan so that we control results
 		DynamicMethodCommandResolver spy = Mockito.spy(resolver);
 		Mockito.when(spy.scanCommands()).thenReturn(commandScanResults);
@@ -92,9 +92,8 @@ class DynamicMethodCommandResolverTests {
 				assertThat(option.getLongNames()).contains("with-greeting");
 				assertThat(option.getType().getType()).isEqualTo(String.class);
 			});
-		}, registration -> {
-			assertThat(registration.getCommand()).isEqualTo("k8s-simple new-services");
-		});
+		}, registration ->
+			assertThat(registration.getCommand()).isEqualTo("k8s-simple new-services"));
 	}
 
 }

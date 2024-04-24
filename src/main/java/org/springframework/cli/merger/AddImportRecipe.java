@@ -23,7 +23,7 @@ import org.openrewrite.java.AddImport;
 
 public class AddImportRecipe extends Recipe {
 
-	private AddImport addImport;
+	private final AddImport addImport;
 
 	public AddImportRecipe(AddImport addImport) {
 		this.addImport = addImport;

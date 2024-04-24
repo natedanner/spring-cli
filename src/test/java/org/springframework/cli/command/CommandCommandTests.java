@@ -46,7 +46,7 @@ public class CommandCommandTests extends AbstractCommandTests {
 	void testCommandNew() {
 		Path projectPath = Path.of("test-data").resolve("projects").resolve("rest-service");
 		IntegrationTestSupport.installInWorkingDirectory(projectPath, workingDir);
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 			assertThat(context).hasSingleBean(CommandCommands.class);
 			CommandCommands commandCommands = context.getBean(CommandCommands.class);
 			commandCommands.commandNew("hello", "world", workingDir.toString());

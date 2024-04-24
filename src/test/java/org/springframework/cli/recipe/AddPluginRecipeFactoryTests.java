@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class AddPluginRecipeFactoryTests {
 
-	private AddPluginRecipeFactory sut = new AddPluginRecipeFactory();
+	private final AddPluginRecipeFactory sut = new AddPluginRecipeFactory();
 
 	@Test
 	@DisplayName("should create Recipe from valid XML")

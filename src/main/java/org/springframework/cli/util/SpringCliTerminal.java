@@ -30,9 +30,9 @@ import org.springframework.util.StringUtils;
  */
 public class SpringCliTerminal implements org.springframework.cli.util.TerminalMessage {
 
-	private Terminal terminal;
+	private final Terminal terminal;
 
-	private ThemeResolver themeResolver;
+	private final ThemeResolver themeResolver;
 
 	public SpringCliTerminal(Terminal terminal, ThemeResolver themeResolver) {
 		this.terminal = terminal;

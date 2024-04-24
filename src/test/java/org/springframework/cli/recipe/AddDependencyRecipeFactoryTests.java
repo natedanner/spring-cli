@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class AddDependencyRecipeFactoryTests {
 
-	private AddDependencyRecipeFactory sut = new AddDependencyRecipeFactory();
+	private final AddDependencyRecipeFactory sut = new AddDependencyRecipeFactory();
 
 	@Test
 	@DisplayName("should create Recipe from valid Xml snippet")

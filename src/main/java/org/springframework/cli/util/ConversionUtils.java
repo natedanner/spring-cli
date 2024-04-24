@@ -34,16 +34,14 @@ public final class ConversionUtils {
 	}
 
 	public static String fromDomToString(Xpp3Dom dom) {
-		String element = dom.toString();
-		return element;
+		return dom.toString();
 	}
 
 	public static String fromDependencyListToString(List<Dependency> dependencies) {
 		StringWriter sw = new StringWriter();
 		Dependencies deps = new Dependencies(dependencies);
 		JAXB.marshal(deps, sw);
-		String xmlString = sw.toString();
-		return xmlString;
+		return sw.toString();
 	}
 
 	/*

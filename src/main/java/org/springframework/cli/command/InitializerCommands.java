@@ -35,6 +35,7 @@ import org.springframework.cli.config.SpringCliUserConfig.Initializrs;
 import org.springframework.cli.initializr.InitializrClient;
 import org.springframework.cli.initializr.InitializrClientCache;
 import org.springframework.cli.initializr.InitializrUtils;
+import org.springframework.cli.initializr.model.IdName;
 import org.springframework.cli.initializr.model.Metadata;
 import org.springframework.shell.command.annotation.Command;
 import org.springframework.shell.command.annotation.Option;
@@ -113,9 +114,7 @@ public class InitializerCommands extends AbstractShellComponent {
 
 	private static final String JAVA_VERSION_ID = "javaVersion";
 
-	private static final Comparator<SelectorItem<String>> NAME_COMPARATOR = (o1, o2) -> {
-		return o1.getName().compareTo(o2.getName());
-	};
+	private static final Comparator<SelectorItem<String>> NAME_COMPARATOR = (o1, o2) -> o1.getName().compareTo(o2.getName());
 
 	private static final Comparator<SelectorItem<String>> JAVA_VERSION_COMPARATOR = (o1, o2) -> {
 		try {
@@ -163,37 +162,37 @@ public class InitializerCommands extends AbstractShellComponent {
 			.getValues()
 			.stream()
 			.filter(v -> ObjectUtils.nullSafeEquals(v.getTags().get("format"), "project"))
-			.collect(Collectors.toMap(v -> v.getName(), v -> v.getId()));
+			.collect(Collectors.toMap(IdName::getName, IdName::getId));
 
 		String defaultProject = metadata.getType().getDefault();
 		String defaultProjectSelect = projectSelectItems.entrySet()
 			.stream()
 			.filter(e -> ObjectUtils.nullSafeEquals(e.getValue(), defaultProject))
-			.map(e -> e.getKey())
+			.map(Map.Entry::getKey)
 			.findFirst()
 			.orElse(null);
 		Map<String, String> languageSelectItems = metadata.getLanguage()
 			.getValues()
 			.stream()
-			.collect(Collectors.toMap(v -> v.getName(), v -> v.getId()));
+			.collect(Collectors.toMap(IdName::getName, IdName::getId));
 
 		String defaultLanguage = metadata.getLanguage().getDefault();
 		String defaultLanguageSelect = languageSelectItems.entrySet()
 			.stream()
 			.filter(e -> ObjectUtils.nullSafeEquals(e.getValue(), defaultLanguage))
-			.map(e -> e.getKey())
+			.map(Map.Entry::getKey)
 			.findFirst()
 			.orElse(null);
 
 		Map<String, String> bootSelectItems = metadata.getBootVersion()
 			.getValues()
 			.stream()
-			.collect(Collectors.toMap(v -> v.getName(), v -> v.getId()));
+			.collect(Collectors.toMap(IdName::getName, IdName::getId));
 		String defaultBootVersion = metadata.getBootVersion().getDefaultversion();
 		String defaultBootVersionSelect = bootSelectItems.entrySet()
 			.stream()
 			.filter(e -> ObjectUtils.nullSafeEquals(e.getValue(), defaultBootVersion))
-			.map(e -> e.getKey())
+			.map(Map.Entry::getKey)
 			.findFirst()
 			.orElse(null);
 
@@ -203,29 +202,29 @@ public class InitializerCommands extends AbstractShellComponent {
 		String defaultName = metadata.getName().getDefault();
 		String defaultDescription = metadata.getDescription().getDefault();
 		String defaultPackageName = metadata.getPackageName().getDefault();
-		dependencies = (dependencies != null) ? dependencies : Collections.emptyList();
+		dependencies = dependencies != null ? dependencies : Collections.emptyList();
 
 		Map<String, String> packagingSelectItems = metadata.getPackaging()
 			.getValues()
 			.stream()
-			.collect(Collectors.toMap(v -> v.getName(), v -> v.getId()));
+			.collect(Collectors.toMap(IdName::getName, IdName::getId));
 		String defaultPackaging = metadata.getPackaging().getDefault();
 		String defaultPackagingSelect = packagingSelectItems.entrySet()
 			.stream()
 			.filter(e -> ObjectUtils.nullSafeEquals(e.getValue(), defaultPackaging))
-			.map(e -> e.getKey())
+			.map(Map.Entry::getKey)
 			.findFirst()
 			.orElse(null);
 
 		Map<String, String> javaVersionSelectItems = metadata.getJavaVersion()
 			.getValues()
 			.stream()
-			.collect(Collectors.toMap(v -> v.getName(), v -> v.getId()));
+			.collect(Collectors.toMap(IdName::getName, IdName::getId));
 		String defaultJavaVersion = metadata.getJavaVersion().getDefault();
 		String defaultJavaVersionSelect = javaVersionSelectItems.entrySet()
 			.stream()
 			.filter(e -> ObjectUtils.nullSafeEquals(e.getValue(), defaultJavaVersion))
-			.map(e -> e.getKey())
+			.map(Map.Entry::getKey)
 			.findFirst()
 			.orElse(null);
 
@@ -362,7 +361,7 @@ public class InitializerCommands extends AbstractShellComponent {
 
 	@Command(command = "list", description = "Show the Initializr server environments")
 	public Table list() {
-		Stream<String[]> header = Stream.<String[]>of(new String[] { "ServerId", "Url" });
+		Stream<String[]> header = Stream.of(new String[] { "ServerId", "Url" });
 		Stream<String[]> rows = this.springCliUserConfig.getInitializrs()
 			.entrySet()
 			.stream()
@@ -396,7 +395,7 @@ public class InitializerCommands extends AbstractShellComponent {
 		InitializrClient client = buildClient(serverId);
 		Metadata metadata = client.getMetadata();
 
-		Stream<String[]> header = Stream.<String[]>of(new String[] { "Id", "Name", "Description", "Required version" });
+		Stream<String[]> header = Stream.of(new String[] { "Id", "Name", "Description", "Required version" });
 		Stream<String[]> rows = metadata.getDependencies()
 			.getValues()
 			.stream()

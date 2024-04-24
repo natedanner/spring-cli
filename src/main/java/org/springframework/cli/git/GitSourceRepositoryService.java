@@ -158,7 +158,7 @@ public class GitSourceRepositoryService implements SourceRepositoryService {
 			String ref = url.getRef();
 			GHRepository ghRepository = github.getRepository(repo);
 			InputStream inputStream = ghRepository
-				.readTar((inputstream) -> new ByteArrayInputStream(StreamUtils.copyToByteArray(inputstream)), ref);
+				.readTar(inputstream -> new ByteArrayInputStream(StreamUtils.copyToByteArray(inputstream)), ref);
 
 			File targetFile = targetPath.toFile();
 			Archiver archiver = ArchiverFactory.createArchiver("tar", "gz");
@@ -171,7 +171,7 @@ public class GitSourceRepositoryService implements SourceRepositoryService {
 
 			Path unTar = Paths.get(targetPath.toFile().getAbsolutePath());
 			AtomicReference<Path> tarDir = new AtomicReference<>();
-			Files.list(unTar.toFile().toPath()).forEach((path) -> {
+			Files.list(unTar.toFile().toPath()).forEach(path -> {
 				if (path.toFile().isDirectory()) {
 					if (tarDir.get() != null) {
 						throw new SpringCliException("Detected multiple directories '" + tarDir.get().toFile().getName()

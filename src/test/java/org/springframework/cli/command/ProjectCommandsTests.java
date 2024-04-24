@@ -45,7 +45,7 @@ public class ProjectCommandsTests {
 
 	@Test
 	void testProjectCommands() {
-		this.contextRunner.run((context) -> {
+		this.contextRunner.run(context -> {
 			assertThat(context).hasSingleBean(ProjectCommands.class);
 			ProjectCommands projectCommands = context.getBean(ProjectCommands.class);
 
@@ -97,7 +97,7 @@ public class ProjectCommandsTests {
 		@Bean
 		SpringCliUserConfig springCliUserConfig() {
 			FileSystem fileSystem = Jimfs.newFileSystem();
-			Function<String, Path> pathProvider = (path) -> fileSystem.getPath(path);
+			Function<String, Path> pathProvider = fileSystem::getPath;
 			return new SpringCliUserConfig(pathProvider);
 		}
 
@@ -114,9 +114,8 @@ public class ProjectCommandsTests {
 		@Bean
 		ProjectCommands projectCommands(SpringCliUserConfig springCliUserConfig,
 				SourceRepositoryService sourceRepositoryService, ObjectMapper objectMapper) {
-			ProjectCommands projectCommands = new ProjectCommands(springCliUserConfig, sourceRepositoryService,
+			return new ProjectCommands(springCliUserConfig, sourceRepositoryService,
 					TerminalMessage.noop(), objectMapper);
-			return projectCommands;
 		}
 
 	}

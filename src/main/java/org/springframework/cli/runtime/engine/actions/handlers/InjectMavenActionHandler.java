@@ -42,13 +42,13 @@ import org.springframework.cli.util.TerminalMessage;
 
 public class InjectMavenActionHandler extends AbstractInjectMavenActionHandler {
 
-	private List<InjectMavenDependency> dependencies;
+	private final List<InjectMavenDependency> dependencies;
 
-	private List<InjectMavenBuildPlugin> buildPlugins;
+	private final List<InjectMavenBuildPlugin> buildPlugins;
 
-	private List<InjectMavenRepository> repositories;
+	private final List<InjectMavenRepository> repositories;
 
-	private List<InjectMavenDependencyManagement> dependencyManagements;
+	private final List<InjectMavenDependencyManagement> dependencyManagements;
 
 	public InjectMavenActionHandler(TemplateEngine templateEngine, Map<String, Object> model, Path cwd,
 			TerminalMessage terminalMessage) {

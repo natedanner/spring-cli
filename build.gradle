@@ -298,7 +298,7 @@ task milestoneVersion {
 		def file = new File('gradle.properties')
 		properties.load(file.newDataInputStream())
 		def currentVersion = properties.getProperty('version')
-		if (currentVersion.indexOf('-SNAPSHOT') > 0) {
+		if (currentVersion.indexOf('-SNAPSHOT') >= 1) {
 			def nextVersion = currentVersion - '-SNAPSHOT' + '-' + postfix
 			properties.setProperty('version', nextVersion)
 			properties.store(file.newWriter(), null)

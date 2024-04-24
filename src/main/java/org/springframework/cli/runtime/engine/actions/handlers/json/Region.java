@@ -49,10 +49,7 @@ public class Region implements IRegion {
 		if (len != other.len) {
 			return false;
 		}
-		if (ofs != other.ofs) {
-			return false;
-		}
-		return true;
+		return !(ofs != other.ofs);
 	}
 
 	@Override

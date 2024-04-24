@@ -51,9 +51,8 @@ public final class RefactorUtils {
 		catch (IOException ex) {
 			throw new SpringCliException("Failed reading files in " + workingPath, ex);
 		}
-		Consumer<Throwable> onError = e -> {
+		Consumer<Throwable> onError = e ->
 			logger.error("error in javaParser execution", e);
-		};
 		InMemoryExecutionContext executionContext = new InMemoryExecutionContext(onError);
 		List<Path> matches = collector.getMatches();
 		List<SourceFile> compilationUnits = javaParser.parse(matches, null, executionContext).toList();

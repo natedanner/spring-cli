@@ -33,7 +33,7 @@ import org.springframework.util.StringUtils;
  */
 public class HandlebarsTemplateEngine implements TemplateEngine {
 
-	private Handlebars handlebars;
+	private final Handlebars handlebars;
 
 	public HandlebarsTemplateEngine() {
 		this.handlebars = new Handlebars();

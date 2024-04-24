@@ -29,9 +29,9 @@ public class Attributes {
 	@Nullable
 	private String maskCharacter;
 
-	private boolean multiple;
+	private final boolean multiple;
 
-	private boolean confirmation;
+	private final boolean confirmation;
 
 	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
 	public Attributes(@JsonProperty("default-value") String defaultValue,

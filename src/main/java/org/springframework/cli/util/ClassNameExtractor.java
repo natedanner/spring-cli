@@ -24,10 +24,10 @@ import java.util.regex.Pattern;
 
 public class ClassNameExtractor {
 
-	private String[] patternStrings = { "(?<=\\bclass\\s)\\w+", "(?<=\\binterface\\s)\\w+", "(?<=\\b@interface\\s)\\w+",
-			"(?<=\\benum\\s)\\w+" };
+	private final String[] patternStrings = {"(?<=\\bclass\\s)\\w+", "(?<=\\binterface\\s)\\w+", "(?<=\\b@interface\\s)\\w+",
+		"(?<=\\benum\\s)\\w+"};
 
-	private List<Pattern> patterns = new ArrayList<>();
+	private final List<Pattern> patterns = new ArrayList<>();
 
 	public ClassNameExtractor() {
 		for (String patternString : patternStrings) {

@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class InjectMavenRepository {
 
-	private String text;
+	private final String text;
 
 	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
 	public InjectMavenRepository(@JsonProperty("text") String text) {

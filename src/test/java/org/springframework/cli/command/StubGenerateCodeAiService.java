@@ -37,8 +37,7 @@ public class StubGenerateCodeAiService extends GenerateCodeAiService {
 		try {
 			ClassPathResource classPathResource = TestResourceUtils.qualifiedResource(StubGenerateCodeAiService.class,
 					"response.md");
-			String response = StreamUtils.copyToString(classPathResource.getInputStream(), StandardCharsets.UTF_8);
-			return response;
+			return StreamUtils.copyToString(classPathResource.getInputStream(), StandardCharsets.UTF_8);
 		}
 		catch (IOException ex) {
 			throw new RuntimeException(ex);

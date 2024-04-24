@@ -44,7 +44,7 @@ public class ActionFileReader {
 		boolean isYamlFile = false;
 		String fileExtension = FileExtensionUtils.getExtension(pathToFile.toString());
 		if (!fileExtension.isEmpty()) {
-			if (fileExtension.equalsIgnoreCase("yaml") || fileExtension.equalsIgnoreCase(("yml"))) {
+			if ("yaml".equalsIgnoreCase(fileExtension) || fileExtension.equalsIgnoreCase("yml")) {
 				isYamlFile = true;
 			}
 		}

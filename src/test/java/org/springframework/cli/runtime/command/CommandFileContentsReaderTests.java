@@ -44,7 +44,7 @@ public class CommandFileContentsReaderTests {
 		List<CommandOption> optionsList = command.getOptions();
 		assertThat(optionsList).hasSize(3);
 		CommandOption commandOption = optionsList.stream()
-			.filter((option) -> "platform".equals(option.getName()))
+			.filter(option -> "platform".equals(option.getName()))
 			.findAny()
 			.orElseThrow();
 		assertThat(commandOption.getDescription()).isEqualTo("platform to target");

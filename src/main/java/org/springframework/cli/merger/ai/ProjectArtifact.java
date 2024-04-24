@@ -20,9 +20,9 @@ import java.util.Objects;
 
 public class ProjectArtifact {
 
-	private ProjectArtifactType artifactType;
+	private final ProjectArtifactType artifactType;
 
-	private String text;
+	private final String text;
 
 	public ProjectArtifact(ProjectArtifactType artifactType, String text) {
 		this.artifactType = artifactType;

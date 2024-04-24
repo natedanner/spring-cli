@@ -29,7 +29,7 @@ public class InjectTextMavenRepositoryRecipe extends Recipe {
 
 	private static final XPathMatcher REPOS_MATCHER = new XPathMatcher("/project/repositories");
 
-	private String text;
+	private final String text;
 
 	public InjectTextMavenRepositoryRecipe(String text) {
 		this.text = text;

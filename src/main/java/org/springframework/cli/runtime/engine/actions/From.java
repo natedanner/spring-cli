@@ -23,7 +23,7 @@ import org.springframework.lang.Nullable;
 
 public class From {
 
-	private Question question;
+	private final Question question;
 
 	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
 	From(@JsonProperty("question") @Nullable Question question) {

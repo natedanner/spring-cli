@@ -23,7 +23,7 @@ import org.springframework.lang.Nullable;
 
 public class Var {
 
-	private From from;
+	private final From from;
 
 	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
 	Var(@JsonProperty("from") @Nullable From from) {

@@ -44,9 +44,8 @@ public class AddPluginRecipeFactory extends AbstractRecipeFactory {
 			String executions = getNullOrTextValue(jsonNode, "executions");
 			@Nullable
 			String filePattern = getNullOrTextValue(jsonNode, "filePattern");
-			AddPlugin addPlugin = new AddPlugin(groupId, artifactId, version, configuration, dependencies, executions,
+			return new AddPlugin(groupId, artifactId, version, configuration, dependencies, executions,
 					filePattern);
-			return addPlugin;
 		}
 		catch (JsonProcessingException ex) {
 			throw new RuntimeException(ex);

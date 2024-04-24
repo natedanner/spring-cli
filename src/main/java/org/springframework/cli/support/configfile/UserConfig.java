@@ -41,7 +41,7 @@ public class UserConfig<T> {
 
 	private static final String APP_DATA = "APP_DATA";
 
-	private Function<String, Path> pathProvider = (path) -> Paths.get(path);
+	private Function<String, Path> pathProvider = path -> Paths.get(path);
 
 	private final String name;
 

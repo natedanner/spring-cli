@@ -43,7 +43,7 @@ public class ExecHandlerTests {
 	@Test
 	@DisabledOnOs(OS.WINDOWS)
 	void simpleExec(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			// Precondition that directory doesn't exist
 			String tmpDir = System.getProperty("java.io.tmpdir");
@@ -67,7 +67,7 @@ public class ExecHandlerTests {
 	@Disabled
 	void testDefineVarUsingExecOutput(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir,
 			@TempDir(cleanup = CleanupMode.ALWAYS) Path tempPath) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			File tempFile = new File(tempPath.toFile(), "temp.txt");
 
@@ -86,7 +86,7 @@ public class ExecHandlerTests {
 	@Disabled
 	void testDefineVarUsingJsonPath(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir,
 			@TempDir(cleanup = CleanupMode.ALWAYS) Path tempPath) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			File tempFile = new File(tempPath.toFile(), "temp.txt");
 
@@ -105,7 +105,7 @@ public class ExecHandlerTests {
 	@DisabledOnOs(OS.WINDOWS)
 	void redirection(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir,
 			@TempDir(cleanup = CleanupMode.ALWAYS) Path tempPath) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			Path outputPath = tempPath.resolve("result.txt");
 			Path commandPath = Path.of("test-data")

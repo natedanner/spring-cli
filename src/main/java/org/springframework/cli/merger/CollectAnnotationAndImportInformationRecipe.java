@@ -39,7 +39,7 @@ public class CollectAnnotationAndImportInformationRecipe extends Recipe {
 
 	private final List<String> declaredImports = new ArrayList<>();
 
-	private final List<Annotation> declaredAnnotations = new ArrayList<Annotation>();
+	private final List<Annotation> declaredAnnotations = new ArrayList<>();
 
 	@Override
 	public String getDisplayName() {

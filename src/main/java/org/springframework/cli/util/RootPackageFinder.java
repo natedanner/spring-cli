@@ -112,8 +112,7 @@ public final class RootPackageFinder {
 				sb.append(".");
 			}
 		}
-		String packageName = sb.toString();
-		return packageName;
+		return sb.toString();
 	}
 
 }

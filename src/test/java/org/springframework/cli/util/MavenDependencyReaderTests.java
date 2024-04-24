@@ -22,12 +22,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MavenDependencyReaderTests {
 
-	private String dependencyText = "<dependency>\n" + "  <groupId>org.springframework.boot</groupId>\n"
-			+ "  <artifactId>spring-boot-starter-data-jpa</artifactId>\n" + "</dependency>\n" + "\n" + "<dependency>\n"
-			+ "  <groupId>org.springframework.boot</groupId>\n"
-			+ "  <artifactId>spring-boot-starter-test</artifactId>\n" + "  <scope>test</scope>\n" + "</dependency>\n"
-			+ "\n" + "<dependency>\n" + "  <groupId>com.h2database</groupId>\n" + "  <artifactId>h2</artifactId>\n"
-			+ "  <scope>runtime</scope>\n" + "</dependency>\n";
+	private final String dependencyText = "<dependency>\n" + "  <groupId>org.springframework.boot</groupId>\n"
+		+ "  <artifactId>spring-boot-starter-data-jpa</artifactId>\n" + "</dependency>\n" + "\n" + "<dependency>\n"
+		+ "  <groupId>org.springframework.boot</groupId>\n"
+		+ "  <artifactId>spring-boot-starter-test</artifactId>\n" + "  <scope>test</scope>\n" + "</dependency>\n"
+		+ "\n" + "<dependency>\n" + "  <groupId>com.h2database</groupId>\n" + "  <artifactId>h2</artifactId>\n"
+		+ "  <scope>runtime</scope>\n" + "</dependency>\n";
 
 	@Test
 	void read() {

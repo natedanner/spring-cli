@@ -25,11 +25,11 @@ import org.springframework.lang.Nullable;
 
 public class Question {
 
-	private String name;
+	private final String name;
 
-	private String label;
+	private final String label;
 
-	private String type;
+	private final String type;
 
 	@Nullable
 	private Options options;

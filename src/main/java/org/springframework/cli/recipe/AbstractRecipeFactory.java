@@ -25,11 +25,11 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
  */
 public class AbstractRecipeFactory {
 
-	private static XmlMapper mapper = new XmlMapper();
+	private static final XmlMapper mapper = new XmlMapper();
 
 	@org.jetbrains.annotations.Nullable
 	protected static String getNullOrTextValue(JsonNode jsonNode, String field) {
-		return (jsonNode.get(field) != null) ? AbstractRecipeFactory.getTextValue(jsonNode, field) : null;
+		return jsonNode.get(field) != null ? AbstractRecipeFactory.getTextValue(jsonNode, field) : null;
 	}
 
 	protected static String getTextValue(JsonNode jsonNode, String field) {
@@ -39,18 +39,17 @@ public class AbstractRecipeFactory {
 		}
 		catch (NullPointerException npe) {
 			throw new RecipeCreationException(
-					"Could not get text value for field '%s' from: \n%s".formatted(field, jsonNode.toPrettyString()));
+					"Could not get text value for field '%s' from: %n%s".formatted(field, jsonNode.toPrettyString()));
 		}
 	}
 
 	protected static JsonNode getJsonNode(String mavenDependencySnippet) throws JsonProcessingException {
-		JsonNode jsonNode = mapper.readTree(mavenDependencySnippet);
-		return jsonNode;
+		return mapper.readTree(mavenDependencySnippet);
 	}
 
 	protected String getTextOrDefaultValue(JsonNode jsonNode, String version, String defaultValue) {
 		String nullOrTextValue = getNullOrTextValue(jsonNode, version);
-		return (nullOrTextValue != null) ? nullOrTextValue : defaultValue;
+		return nullOrTextValue != null ? nullOrTextValue : defaultValue;
 	}
 
 }

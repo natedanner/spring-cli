@@ -54,9 +54,8 @@ public class AddManagedDependencyRecipeFactory extends AbstractRecipeFactory {
 			String classifier = getNullOrTextValue(jsonNode, "classifier");
 			@Nullable
 			String type = getNullOrTextValue(jsonNode, "type");
-			AddManagedDependencyRecipe addManagedDependency = new AddManagedDependencyRecipe(groupId, artifactId,
+			return new AddManagedDependencyRecipe(groupId, artifactId,
 					version, scope, type, classifier);
-			return addManagedDependency;
 		}
 		catch (JsonProcessingException ex) {
 			throw new RuntimeException(ex);
@@ -73,9 +72,8 @@ public class AddManagedDependencyRecipeFactory extends AbstractRecipeFactory {
 		String scope = dependency.getScope();
 		String type = dependency.getType();
 		String classifier = dependency.getClassifier();
-		AddManagedDependencyRecipe addManagedDependency = new AddManagedDependencyRecipe(groupId, artifactId, version,
+		return new AddManagedDependencyRecipe(groupId, artifactId, version,
 				scope, type, classifier);
-		return addManagedDependency;
 	}
 
 }

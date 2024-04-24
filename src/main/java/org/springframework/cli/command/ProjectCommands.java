@@ -91,8 +91,8 @@ public class ProjectCommands {
 		// Retrieve project that were registered using the `project add` command and
 		// stored locally
 		List<ProjectRepository> repos = upCliUserConfig.getProjectRepositories().getProjectRepositories();
-		List<ProjectRepositoryData> projectRepositories = ((repos != null) ? repos.stream()
-				: Stream.<ProjectRepository>empty())
+		List<ProjectRepositoryData> projectRepositories = (repos != null ? repos.stream()
+				: Stream.empty())
 			.map(pr -> new ProjectRepositoryData(pr.getName(), pr.getUrl(), pr.getDescription(), pr.getTags(), null))
 			.collect(Collectors.toList());
 
@@ -122,7 +122,7 @@ public class ProjectCommands {
 			return objectMapper.writeValueAsString(projectRepositories);
 		}
 
-		Stream<String[]> header = Stream.<String[]>of(new String[] { "Name", "Description", "URL", "Catalog", "Tags" });
+		Stream<String[]> header = Stream.of(new String[] { "Name", "Description", "URL", "Catalog", "Tags" });
 
 		// Retrieve project that were registered using the `project add` command and
 		// stored locally

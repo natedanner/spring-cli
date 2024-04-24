@@ -20,9 +20,9 @@ public class Greeter {
 
 	private int calls;
 
-	private String prefix;
+	private final String prefix;
 
-	private String suffix;
+	private final String suffix;
 
 	public Greeter(String prefix, String suffix) {
 		this.prefix = prefix;

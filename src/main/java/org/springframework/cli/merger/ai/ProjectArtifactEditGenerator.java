@@ -179,7 +179,7 @@ public class ProjectArtifactEditGenerator {
 	private List<Lsp.ChangeOperation> convertToEdits(List<Result> allResults, String changeAnnotationId) {
 		List<Lsp.ChangeOperation> edits = new ArrayList<>();
 		for (Result res : allResults) {
-			Path p = (res.getBefore() == null) ? res.getAfter().getSourcePath() : res.getBefore().getSourcePath();
+			Path p = res.getBefore() == null ? res.getAfter().getSourcePath() : res.getBefore().getSourcePath();
 			String uri = p.toUri().toASCIIString();
 			ConversionUtils
 				.computeTextDocEdit(uri, res.getBefore().printAll(), res.getAfter().printAll(), changeAnnotationId)

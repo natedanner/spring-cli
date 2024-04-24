@@ -37,7 +37,7 @@ public class InjectHandlerTests {
 
 	@Test
 	void injectBefore(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			Path sampleFile = Path.of("test-data")
 				.resolve("commands")
@@ -64,7 +64,7 @@ public class InjectHandlerTests {
 
 	@Test
 	void injectAfter(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			Path sampleFile = Path.of("test-data")
 				.resolve("commands")
@@ -92,7 +92,7 @@ public class InjectHandlerTests {
 
 	@Test
 	void injectSkip(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			Path sampleFile = Path.of("test-data")
 				.resolve("commands")

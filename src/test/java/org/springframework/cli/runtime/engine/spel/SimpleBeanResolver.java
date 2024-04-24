@@ -22,7 +22,7 @@ import org.springframework.expression.EvaluationContext;
 
 public class SimpleBeanResolver implements BeanResolver {
 
-	private ApplicationContext applicationContext;
+	private final ApplicationContext applicationContext;
 
 	public SimpleBeanResolver(ApplicationContext applicationContext) {
 		this.applicationContext = applicationContext;

@@ -41,7 +41,7 @@ class ListLineTracker {
 	public static final String[] DELIMITERS = { "\r", "\n", "\r\n" }; //$NON-NLS-3$ //$NON-NLS-1$ //$NON-NLS-2$
 
 	/** A predefined delimiter information which is always reused as return value */
-	private DelimiterInfo fDelimiterInfo = new DelimiterInfo();
+	private final DelimiterInfo fDelimiterInfo = new DelimiterInfo();
 
 	/** The line information */
 	private final List<Line> fLines = new ArrayList<>();
@@ -62,7 +62,7 @@ class ListLineTracker {
 	 */
 	private int findLine(int offset) {
 
-		if (fLines.size() == 0) {
+		if (fLines.isEmpty()) {
 			return -1;
 		}
 
@@ -166,7 +166,7 @@ class ListLineTracker {
 			}
 
 			Line l = fLines.get(lastLine);
-			return ((l.delimiter != null) ? lastLine + 1 : lastLine);
+			return l.delimiter != null ? lastLine + 1 : lastLine;
 		}
 
 		return findLine(position);
@@ -183,7 +183,7 @@ class ListLineTracker {
 				return new Region(0, 0);
 			}
 			Line l = fLines.get(size - 1);
-			return ((l.delimiter != null) ? new Line(fTextLength, 0) : new Line(fTextLength - l.length, l.length));
+			return l.delimiter != null ? new Line(fTextLength, 0) : new Line(fTextLength - l.length, l.length);
 		}
 
 		return getLineInformation(findLine(position));
@@ -206,7 +206,7 @@ class ListLineTracker {
 		}
 
 		Line l = fLines.get(line);
-		return ((l.delimiter != null) ? new Line(l.offset, l.length - l.delimiter.length()) : l);
+		return l.delimiter != null ? new Line(l.offset, l.length - l.delimiter.length()) : l;
 	}
 
 	final int getLineOffset(int line) throws BadLocationException {
@@ -240,7 +240,7 @@ class ListLineTracker {
 		}
 
 		Line l = fLines.get(lines - 1);
-		return ((l.delimiter != null) ? lines + 1 : lines);
+		return l.delimiter != null ? lines + 1 : lines;
 	}
 
 	final int getNumberOfLines(int position, int length) throws BadLocationException {

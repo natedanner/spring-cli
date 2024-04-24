@@ -40,7 +40,7 @@ public class RoleCommandTests {
 
 	@Test
 	void defaultRole(final @TempDir Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			StubTerminalMessage terminalMessage = new StubTerminalMessage();
 			RoleCommands roleCommands = new RoleCommands(terminalMessage, workingDir);
@@ -74,7 +74,7 @@ public class RoleCommandTests {
 
 	@Test
 	void qaRole(final @TempDir Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			StubTerminalMessage terminalMessage = new StubTerminalMessage();
 			RoleCommands roleCommands = new RoleCommands(terminalMessage, workingDir);

@@ -39,7 +39,7 @@ public class AiCommandsTests {
 	@Test
 	@DisabledOnOs(OS.WINDOWS)
 	void addJpa(@TempDir(cleanup = CleanupMode.ON_SUCCESS) Path workingDir) {
-		this.contextRunner.withUserConfiguration(MockUserConfig.class).run((context) -> {
+		this.contextRunner.withUserConfiguration(MockUserConfig.class).run(context -> {
 
 			StubGenerateCodeAiService stubGenerateCodeAiService = new StubGenerateCodeAiService(TerminalMessage.noop());
 			AiCommands aiCommands = new AiCommands(new OpenAiHandler(stubGenerateCodeAiService),

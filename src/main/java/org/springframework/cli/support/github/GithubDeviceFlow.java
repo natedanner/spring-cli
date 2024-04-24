@@ -36,10 +36,10 @@ import org.springframework.web.reactive.function.client.WebClient;
  */
 public class GithubDeviceFlow {
 
-	private static final ParameterizedTypeReference<Map<String, String>> RESPONSE_TYPE_REFERENCE = new ParameterizedTypeReference<Map<String, String>>() {
+	private static final ParameterizedTypeReference<Map<String, String>> RESPONSE_TYPE_REFERENCE = new ParameterizedTypeReference<>() {
 	};
 
-	private String baseUrl;
+	private final String baseUrl;
 
 	/**
 	 * Constructs a new github device flow.
@@ -68,8 +68,7 @@ public class GithubDeviceFlow {
 			.accept(MediaType.APPLICATION_JSON)
 			.retrieve()
 			.bodyToMono(RESPONSE_TYPE_REFERENCE);
-		Map<String, String> values = response.block();
-		return values;
+		return response.block();
 	}
 
 	/**
@@ -91,9 +90,7 @@ public class GithubDeviceFlow {
 				.queryParam("grant_type", "urn:ietf:params:oauth:grant-type:device_code")
 				.build())
 			.accept(MediaType.APPLICATION_JSON)
-			.exchangeToMono(response -> {
-				return response.bodyToMono(RESPONSE_TYPE_REFERENCE);
-			})
+			.exchangeToMono(response -> response.bodyToMono(RESPONSE_TYPE_REFERENCE))
 			.flatMap(data -> {
 				String token = data.get("access_token");
 				if (StringUtils.hasText(token)) {
@@ -104,7 +101,7 @@ public class GithubDeviceFlow {
 				}
 			})
 			.retryWhen(Retry.fixedDelay(timeout / interval, Duration.ofSeconds(interval))
-				.filter(t -> t instanceof NoAccessTokenException))
+				.filter(GithubDeviceFlow.NoAccessTokenException.class::isInstance))
 			.onErrorResume(e -> Mono.empty());
 		return accessToken.blockOptional();
 	}
